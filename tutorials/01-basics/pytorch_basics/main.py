@@ -28,13 +28,15 @@ w = torch.tensor(2., requires_grad=True)
 b = torch.tensor(3., requires_grad=True)
 
 # Build a computational graph.
-y = w * x + b    # y = 2 * x + 3
+y = w * x + b    # y = 2 * x + 3  # 计算图可以直接自己定义的意思，但是这个y是啥
+# y是以拟合为目的得到的值
+# 但是下面为什么没有损失函数也没有需要拟合的真实值就去算梯度？
 
 # Compute gradients.
 y.backward()
 
 # Print out the gradients.
-print(x.grad)    # x.grad = 2 
+print(x.grad)    # x.grad = 2  # 不分谁是自变量全部都可以求导？
 print(w.grad)    # w.grad = 1 
 print(b.grad)    # b.grad = 1 
 
@@ -48,7 +50,7 @@ x = torch.randn(10, 3)
 y = torch.randn(10, 2)
 
 # Build a fully connected layer.
-linear = nn.Linear(3, 2)
+linear = nn.Linear(3, 2) # 没有显式的w和b
 print ('w: ', linear.weight)
 print ('b: ', linear.bias)
 
